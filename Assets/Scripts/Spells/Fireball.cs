@@ -9,6 +9,8 @@ public class Fireball : MonoBehaviour
     public GameObject fbObj;
     public GameObject lSpawn;
     public GameObject rSpawn;
+    public ParticleSystem lSparks;
+    public ParticleSystem rSparks;
 
     void Update()
     {
@@ -28,12 +30,14 @@ public class Fireball : MonoBehaviour
         if (isCastingLeft && !wasCastingLeft)
         {
             Debug.Log("Left fireball cast!");
+            lSparks.Play();
             Instantiate(fbObj, lSpawn.transform.position, lSpawn.transform.rotation);
         }
 
         if (isCastingRight && !wasCastingRight)
         {
             Debug.Log("Right fireball cast!");
+            rSparks.Play();
             Instantiate(fbObj, rSpawn.transform.position, rSpawn.transform.rotation);
         }
 
