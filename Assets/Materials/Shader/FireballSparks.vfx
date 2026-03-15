@@ -129,7 +129,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":10300,"guid":"0000000000000000f000000000000000","type":0}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ddfdd35f14dd3f549b9f2aa1c046a228","type":3}}'
     m_Space: -1
   m_Property:
     name: mainTexture
@@ -211,10 +211,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 397
-    y: -492
-    width: 757
-    height: 1736
+    x: 0
+    y: -433
+    width: 1129
+    height: 1652
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1

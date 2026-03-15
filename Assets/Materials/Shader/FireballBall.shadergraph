@@ -879,7 +879,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": 5.0,
+    "m_Value": 7.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -1129,7 +1129,7 @@
         "m_Id": "373a466c63414f0c92c6128ae3a43c49"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
@@ -1398,7 +1398,7 @@
     "m_Color": {
         "color": {
             "r": 1.0,
-            "g": 0.38597679138183596,
+            "g": 0.2787746787071228,
             "b": 0.0,
             "a": 0.0
         },
