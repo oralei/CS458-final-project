@@ -14,7 +14,6 @@ public class Fireball : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("bingus");
         var ps = PlayerTransformState.Instance;
         if (ps == null) return;
 
