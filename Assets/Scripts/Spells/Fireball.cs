@@ -30,14 +30,24 @@ public class Fireball : MonoBehaviour
         {
             Debug.Log("Left fireball cast!");
             lSparks.Play();
-            Instantiate(fbObj, lSpawn.transform.position, lSpawn.transform.rotation);
+
+            GameObject fb = Instantiate(fbObj, lSpawn.transform.position, lSpawn.transform.rotation);
+
+            // Wire up homing target from the lock-on system
+            FireballProjectile projectile = fb.GetComponent<FireballProjectile>();
+            if (projectile != null && LockOnSystem.Instance != null)
+                projectile.homingTarget = LockOnSystem.Instance.lockedTargetLeft;
         }
 
         if (isCastingRight && !wasCastingRight)
         {
             Debug.Log("Right fireball cast!");
             rSparks.Play();
-            Instantiate(fbObj, rSpawn.transform.position, rSpawn.transform.rotation);
+            GameObject fb = Instantiate(fbObj, rSpawn.transform.position, rSpawn.transform.rotation);
+
+            FireballProjectile projectile = fb.GetComponent<FireballProjectile>();
+            if (projectile != null && LockOnSystem.Instance != null)
+                projectile.homingTarget = LockOnSystem.Instance.lockedTargetRight;
         }
 
         wasCastingLeft = isCastingLeft;
