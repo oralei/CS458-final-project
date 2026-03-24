@@ -4,6 +4,7 @@ public class MissleLauncher : MonoBehaviour
 {
     public GameObject missle;
     public ParticleSystem sparks;
+    public float speed = 6.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +22,6 @@ public class MissleLauncher : MonoBehaviour
         sparks.Play(spawnBlock);
 
         Rigidbody rb = spawnBlock.GetComponent<Rigidbody>();
-        rb.linearVelocity = transform.forward * 6.5f;
+        rb.linearVelocity = transform.forward * speed;
     }
 }
