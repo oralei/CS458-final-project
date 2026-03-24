@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Camera0
   - Enemy
+  - PlayerHead
+  - PlayerBody
   layers:
   - Default
   - TransparentFX

@@ -57,7 +57,7 @@ public class FireballProjectile : MonoBehaviour
             {
                 eh.TakeDamage(25f);
             }
-                Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

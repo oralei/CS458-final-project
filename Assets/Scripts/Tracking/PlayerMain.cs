@@ -9,6 +9,9 @@ public class PlayerMain : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
     public float health = 100f;
 
+    public Transform HeadAimPoint;
+    public Transform ChestAimPoint;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -37,5 +40,12 @@ public class PlayerMain : MonoBehaviour
 
         health = Mathf.Clamp(health - damage, 0, 100);
         healthText.text = "Health: " + health;
+    }
+
+    public Vector3 GetChestPosition()
+    {
+        Vector3 chestOffset = HeadAimPoint.position + (Vector3.down * 1.35f); // down a bit
+
+        return chestOffset;
     }
 }
