@@ -23,10 +23,18 @@ public class PlayerMain : MonoBehaviour
 
     public void DamagePlayer(float damage, Collider hitCollider = null)
     {
+        bool headShot = false;
         if (hitCollider != null && hitCollider == headHitBox)
+        {
             damage = damage * 2f;
+            headShot = true;
+        }
 
-        Debug.Log("Player hit for " + damage + " damage!");
+        if (headShot)
+            Debug.Log("Player headshot for " + damage + " damage!");
+        else
+            Debug.Log("Player hit for " + damage + " damage!");
+
         health = Mathf.Clamp(health - damage, 0, 100);
         healthText.text = "Health: " + health;
     }

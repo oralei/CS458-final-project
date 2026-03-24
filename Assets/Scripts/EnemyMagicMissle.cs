@@ -17,7 +17,7 @@ public class EnemyMagicMissle : MonoBehaviour
         rb.linearVelocity = transform.forward * 6.5f;
         homingTarget = PlayerMain.Instance.transform;
         StartCoroutine(DestroySelf());
-        randomHeight = Random.Range(0.5f, 1.625f);
+        randomHeight = Random.Range(0.5f, 1.4f);
     }
 
     // Update is called based on framerate
