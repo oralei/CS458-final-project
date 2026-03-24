@@ -1,20 +1,23 @@
 using UnityEngine;
 using System.Collections;
 
-public class FireballProjectile : MonoBehaviour
+public class EnemyMagicMissle : MonoBehaviour
 {
-    public float lifetime = 4f;
+    public float lifetime = 3f;
     public float homingStrength = 25f;  // how aggressively it steers
     [HideInInspector] public Transform homingTarget;
     private Rigidbody rb;
+    float randomHeight = 0f;
+    public float damage = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.linearVelocity = transform.forward * 6.5f;
-
+        homingTarget = PlayerMain.Instance.transform;
         StartCoroutine(DestroySelf());
+        randomHeight = Random.Range(0.5f, 1.625f);
     }
 
     // Update is called based on framerate
@@ -23,7 +26,7 @@ public class FireballProjectile : MonoBehaviour
         if (homingTarget == null) return;
 
         // Proportional Navigation: steer toward target
-        Vector3 dirToTarget = (homingTarget.position - transform.position).normalized;
+        Vector3 dirToTarget = (homingTarget.position + (Vector3.up * randomHeight) - transform.position).normalized;
         float speed = rb.linearVelocity.magnitude;
 
         rb.linearVelocity = Vector3.Lerp(
@@ -46,9 +49,9 @@ public class FireballProjectile : MonoBehaviour
     // I used OnTriggerEnter, as OnCollisionEnter was not working well
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            PlayerMain.Instance.DamagePlayer(damage);
             Destroy(gameObject);
         }
     }

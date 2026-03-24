@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6626481830118155622}
   - component: {fileID: 573801195183639923}
   - component: {fileID: 7992918656302951237}
-  - component: {fileID: 6353344001322218710}
   - component: {fileID: 2640272656119589807}
+  - component: {fileID: 2879400239338239805}
   m_Layer: 0
   m_Name: misslePrefab
   m_TagString: Untagged
@@ -111,23 +111,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.6
+  m_Radius: 0.44
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6353344001322218710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4823496433032978756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f87fa2a1147714ebab8d0905789870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 4
-  homingStrength: 25
-  homingTarget: {fileID: 0}
 --- !u!54 &2640272656119589807
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,6 +140,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2879400239338239805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823496433032978756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d612e167e80f33d4091aff492101a07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3
+  homingStrength: 33
+  homingTarget: {fileID: 0}
+  damage: 1
 --- !u!1 &5161762218489176302
 GameObject:
   m_ObjectHideFlags: 0

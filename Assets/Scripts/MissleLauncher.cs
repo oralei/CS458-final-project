@@ -18,10 +18,11 @@ public class MissleLauncher : MonoBehaviour
 
     void SummonMissle()
     {
-        GameObject spawnBlock = Instantiate(missle, transform.position, transform.rotation);
+        GameObject spawnBlock = Instantiate(missle, transform.position + transform.forward * 0.1f, transform.rotation);
         sparks.Play(spawnBlock);
 
         Rigidbody rb = spawnBlock.GetComponent<Rigidbody>();
         rb.linearVelocity = transform.forward * speed;
+        Debug.Log("Turret Shot!");
     }
 }

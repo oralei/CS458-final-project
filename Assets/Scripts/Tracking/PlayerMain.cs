@@ -1,14 +1,16 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerMain : MonoBehaviour
 {
-    public CapsuleCollider bodyHitBox;
+    public BoxCollider bodyHitBox;
     public SphereCollider headHitBox;
-    public PlayerMain Instance;
+    public static PlayerMain Instance;
+    [SerializeField] TextMeshProUGUI healthText;
     public float health = 100f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         Instance = this;
     }
@@ -17,5 +19,15 @@ public class PlayerMain : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DamagePlayer(float damage, Collider hitCollider = null)
+    {
+        if (hitCollider != null && hitCollider == headHitBox)
+            damage = damage * 2f;
+
+        Debug.Log("Player hit for " + damage + " damage!");
+        health = Mathf.Clamp(health - damage, 0, 100);
+        healthText.text = "Health: " + health;
     }
 }

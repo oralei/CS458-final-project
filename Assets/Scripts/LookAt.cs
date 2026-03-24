@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class LookAt : MonoBehaviour
 {
+    private Transform target;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        target = PlayerMain.Instance.transform;
     }
-
-    public Transform target;
 
     void Update()
     {
         // Rotate the camera every frame so it keeps looking at the target
-        transform.LookAt(target.position + (Vector3.up * 1f));
+        transform.LookAt(target.position);
     }
 }
