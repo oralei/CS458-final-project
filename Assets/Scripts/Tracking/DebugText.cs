@@ -35,8 +35,14 @@ public class DebugDisplay : MonoBehaviour
         var los = LockOnSystem.Instance;
 
         float calibrated = ps.CalibratedArmLength;
+
+        // Arm Distances, simply use Vector2.Distance and take the position of the hand to head. Ignore the y (we dont care about height).
         float rightArmCurrent = Vector2.Distance(
             new Vector2(ps.RightHandPosition.x, ps.RightHandPosition.z),
+            new Vector2(ps.HeadPosition.x, ps.HeadPosition.z)
+        );
+        float leftArmCurrent = Vector2.Distance(
+            new Vector2(ps.LeftHandPosition.x, ps.LeftHandPosition.z),
             new Vector2(ps.HeadPosition.x, ps.HeadPosition.z)
         );
 
@@ -53,8 +59,9 @@ public class DebugDisplay : MonoBehaviour
 
             $"=== LEFT ARM EXTENSION ===\n" +
             $"Calibrated Length: {(calibrated < 0 ? "<color=#FF0000>Uncalibrated</color>" : $"{calibrated:F2}m")}\n" +
-            $"Current Length: {rightArmCurrent:F2}m\n" +
+            $"Current Length: {leftArmCurrent:F2}m\n" +
             $"Arm Extended: {ColorValue(ps.LeftArmExtended)}\n\n" +
+            $"Arm Close: {ColorValue(ps.LeftArmClose)}\n\n" +
 
             $"=== LEFT LOCK ON ===\n" +
             (los != null ? GetLockOnStatus(los.lockedTargetLeft, los.candidateLeft) : "No LockOnSystem");
@@ -69,6 +76,7 @@ public class DebugDisplay : MonoBehaviour
             $"Calibrated Length: {(calibrated < 0 ? "<color=#FF0000>Uncalibrated</color>" : $"{calibrated:F2}m")}\n" +
             $"Current Length: {rightArmCurrent:F2}m\n" +
             $"Arm Extended: {ColorValue(ps.RightArmExtended)}\n\n" +
+            $"Arm Close: {ColorValue(ps.RightArmClose)}\n\n" +
 
             $"=== RIGHT LOCK ON ===\n" +
             (los != null ? GetLockOnStatus(los.lockedTargetRight, los.candidateRight) : "No LockOnSystem");

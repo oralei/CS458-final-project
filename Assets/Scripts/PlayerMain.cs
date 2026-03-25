@@ -8,6 +8,7 @@ public class PlayerMain : MonoBehaviour
     public static PlayerMain Instance;
     [SerializeField] TextMeshProUGUI healthText;
     public float health = 100f;
+    public float chestHeightOffset = 0.7f;
 
     public Transform HeadAimPoint;
     public Transform ChestAimPoint;
@@ -44,7 +45,7 @@ public class PlayerMain : MonoBehaviour
 
     public Vector3 GetChestPosition()
     {
-        Vector3 chestOffset = HeadAimPoint.position + (Vector3.down * 1.35f); // down a bit
+        Vector3 chestOffset = HeadAimPoint.position + (Vector3.down * chestHeightOffset); // down a bit
 
         return chestOffset;
     }

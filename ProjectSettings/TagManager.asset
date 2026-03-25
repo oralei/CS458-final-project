@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - PlayerHead
   - PlayerBody
+  - Shield
   layers:
   - Default
   - TransparentFX

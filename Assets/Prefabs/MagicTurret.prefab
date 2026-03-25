@@ -5210,9 +5210,9 @@ GameObject:
   - component: {fileID: 6268666213666562061}
   - component: {fileID: 70114850782508112}
   - component: {fileID: 8517797011225287491}
-  - component: {fileID: 7642062906209831644}
   - component: {fileID: 1684530624411671425}
   - component: {fileID: 1385629658554843908}
+  - component: {fileID: 4060466399295722971}
   m_Layer: 6
   m_Name: MagicTurret
   m_TagString: Enemy
@@ -5229,7 +5229,7 @@ Transform:
   m_GameObject: {fileID: 8721509090279310740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.32, y: 2.0899544, z: 4.4731736}
+  m_LocalPosition: {x: -0.06, y: 1.55, z: 8.65}
   m_LocalScale: {x: 0.28405, y: 0.28405, z: 0.28405}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5424,20 +5424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2c7e63fdd6b0445a199e4896719a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7642062906209831644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8721509090279310740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b22fe0a3455e24fb7a7ab281f6ebcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistance: 5
-  speed: 1
 --- !u!54 &1684530624411671425
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5484,5 +5470,19 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.3
+  m_Radius: 1.6
   m_Center: {x: -0.00000035762787, y: 0.05142647, z: 0.02859807}
+--- !u!114 &4060466399295722971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721509090279310740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 211a3e61ed892864c813bc219344f8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 5
+  speed: 1

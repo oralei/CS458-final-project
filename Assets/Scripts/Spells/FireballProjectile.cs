@@ -49,12 +49,10 @@ public class FireballProjectile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth eh = other.GetComponent<EnemyHealth>();
-            if (eh != null)
-            {
-                Destroy(other);
+            if (eh == null){
+                Destroy(other.gameObject);
             }
-            else
-            {
+            else{
                 eh.TakeDamage(25f);
             }
             Destroy(gameObject);

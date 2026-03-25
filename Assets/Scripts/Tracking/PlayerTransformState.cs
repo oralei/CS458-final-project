@@ -22,7 +22,7 @@ public class PlayerTransformState : MonoBehaviour
 
     [HideInInspector] public float CalibratedArmLength = -1f; // -1 means uncalibrated
 
-    // Gestures - Left
+    // ----------- Left Gestures -----------
     public bool LeftFist => LeftGrip >= 0.9f && LeftTrigger >= 0.9f;
     public bool LeftFingerGun => LeftGrip >= 0.9f && LeftTrigger < 0.2f;
 
@@ -39,9 +39,23 @@ public class PlayerTransformState : MonoBehaviour
         }
     }
 
-    public bool lFireReady => LeftFingerGun && LeftArmExtended;
+    public bool LeftArmClose
+    {
+        get
+        {
+            if (CalibratedArmLength < 0) return false;
+            float current = Vector2.Distance(
+                new Vector2(LeftHandPosition.x, LeftHandPosition.z),
+                new Vector2(HeadPosition.x, HeadPosition.z)
+            );
+            return current <= CalibratedArmLength * 0.5f;
+        }
+    }
 
-    // Gestures - Right
+    public bool lFireReady => LeftFingerGun && LeftArmExtended;  // FIREBALL READY
+    public bool lShieldReady => LeftArmClose && LeftFist;        // SHIELD READY
+
+    // ----------- Right Gestures -----------
     public bool RightFist => RightGrip >= 0.9f && RightTrigger >= 0.9f;
     public bool RightFingerGun => RightGrip >= 0.9f && RightTrigger < 0.2f;
 
@@ -58,7 +72,21 @@ public class PlayerTransformState : MonoBehaviour
         }
     }
 
-    public bool rFireReady => RightFingerGun && RightArmExtended;
+    public bool RightArmClose
+    {
+        get
+        {
+            if (CalibratedArmLength < 0) return false;
+            float current = Vector2.Distance(
+                new Vector2(RightHandPosition.x, RightHandPosition.z),
+                new Vector2(HeadPosition.x, HeadPosition.z)
+            );
+            return current <= CalibratedArmLength * 0.5f;
+        }
+    }
+
+    public bool rFireReady => RightFingerGun && RightArmExtended;  // FIREBALL READY
+    public bool rShieldReady => RightArmClose && RightFist;        // SHIELD READY
 
     void Awake()
     {

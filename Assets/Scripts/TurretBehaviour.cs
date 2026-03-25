@@ -16,7 +16,7 @@ public class TurretBehaviour : MonoBehaviour
     void Update()
     {
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, playerTarget.position + (Vector3.up * 1f));
+        lineRenderer.SetPosition(1, PlayerMain.Instance.ChestAimPoint.position);
     }
 
     void OnDestroy()
