@@ -68,7 +68,7 @@ public class LockOnSystem : MonoBehaviour
         // LEFT hand finger gun AND extended arm
         if (ps.lFireReady)
         {
-            UpdateHand("LEFT", ps.LeftHandPosition, ps.LeftHandRotation,
+            UpdateHand("LEFT", leftHandTransform.position, ps.LeftHandRotation,
                 ref candidateLeft, ref previousCandidateLeft,
                 ref dwellTimerLeft, ref lockedTargetLeft);
         }
@@ -79,7 +79,7 @@ public class LockOnSystem : MonoBehaviour
         // RIGHT hand finger gun AND extended arm
         if (ps.rFireReady)
         {
-            UpdateHand("RIGHT", ps.RightHandPosition, ps.RightHandRotation,
+            UpdateHand("RIGHT", rightHandTransform.position, ps.RightHandRotation,
                 ref candidateRight, ref previousCandidateRight,
                 ref dwellTimerRight, ref lockedTargetRight);
         }
