@@ -52,8 +52,24 @@ public class PlayerTransformState : MonoBehaviour
         }
     }
 
+    public bool LeftHandPotion
+    {
+        get
+        {
+            float distance = Vector3.Distance(HeadPosition, LeftHandPosition);
+            if (distance <= 0.2f && LeftFist)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
     public bool lFireReady => LeftFingerGun && LeftArmExtended;  // FIREBALL READY
-    public bool lShieldReady => LeftArmClose && LeftFist;        // SHIELD READY
+    public bool lShieldReady => LeftArmClose && LeftFist && !LeftHandPotion;        // SHIELD READY
 
     // ----------- Right Gestures -----------
     public bool RightFist => RightGrip >= 0.9f && RightTrigger >= 0.9f;
@@ -84,9 +100,29 @@ public class PlayerTransformState : MonoBehaviour
             return current <= CalibratedArmLength * 0.5f;
         }
     }
-
+    public bool RightHandPotion
+    {
+        get
+        {
+            float distance = Vector3.Distance(HeadPosition, RightHandPosition);
+            if (distance <= 0.2f && RightFist)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     public bool rFireReady => RightFingerGun && RightArmExtended;  // FIREBALL READY
-    public bool rShieldReady => RightArmClose && RightFist;        // SHIELD READY
+    public bool rShieldReady => RightArmClose && RightFist && !RightHandPotion;  // SHIELD READY
+
+    // ----------- Head Gestures -----------
+    public bool PotionHeadTilted => HeadForward.y >= 0.15f;
+
+    public bool rPotionReady => RightHandPotion && PotionHeadTilted;
+    public bool lPotionReady => LeftHandPotion && PotionHeadTilted;
 
     void Awake()
     {

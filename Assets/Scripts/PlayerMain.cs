@@ -49,4 +49,10 @@ public class PlayerMain : MonoBehaviour
 
         return chestOffset;
     }
+
+    public void HealPlayer(float healAmount)
+    {
+        health = Mathf.Clamp(health + healAmount, 0, 100);
+        healthText.text = "Health: " + health;
+    }
 }
