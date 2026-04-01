@@ -27,14 +27,14 @@ public class Potion : MonoBehaviour
 
         if (ps.lPotionReady)
         {
-            
             if (lPressed && !lastLPressed)
                 DrinkPotion();
         }
 
-        if (rPressed && ps.rPotionReady && !lastRPressed)
+        if (ps.rPotionReady)
         {
-            DrinkPotion();
+            if (rPressed && !lastRPressed)
+                DrinkPotion();
         }
 
         lastLPressed = lPressed; 

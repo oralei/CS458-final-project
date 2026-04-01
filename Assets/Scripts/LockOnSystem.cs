@@ -24,7 +24,7 @@ public class LockOnSystem : MonoBehaviour
     [Header("Targeting")]
     [SerializeField] private LayerMask targetLayer;
 
-    [Header("Hand Transforms (for Gizmos)")]
+    [Header("Hand Transforms (for Gizmos)")] // and also now for actual cone
     [SerializeField] private Transform leftHandTransform;
     [SerializeField] private Transform rightHandTransform;
 
@@ -68,7 +68,7 @@ public class LockOnSystem : MonoBehaviour
         // LEFT hand finger gun AND extended arm
         if (ps.lFireReady)
         {
-            UpdateHand("LEFT", leftHandTransform.position, ps.LeftHandRotation,
+            UpdateHand("LEFT", leftHandTransform.position, leftHandTransform.rotation,
                 ref candidateLeft, ref previousCandidateLeft,
                 ref dwellTimerLeft, ref lockedTargetLeft);
         }
@@ -79,7 +79,7 @@ public class LockOnSystem : MonoBehaviour
         // RIGHT hand finger gun AND extended arm
         if (ps.rFireReady)
         {
-            UpdateHand("RIGHT", rightHandTransform.position, ps.RightHandRotation,
+            UpdateHand("RIGHT", rightHandTransform.position, rightHandTransform.rotation,
                 ref candidateRight, ref previousCandidateRight,
                 ref dwellTimerRight, ref lockedTargetRight);
         }
