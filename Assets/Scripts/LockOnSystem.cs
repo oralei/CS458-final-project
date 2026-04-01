@@ -13,6 +13,12 @@ public class LockOnSystem : MonoBehaviour
 {
     public static LockOnSystem Instance { get; private set; }
 
+    public GameObject diamondPrefab;
+
+    // Diamond instances per hand
+    private GameObject diamondLeft;
+    private GameObject diamondRight;
+
     [Header("Cone Settings")]
     public float coneAngle = 20f;
     public float coneRange = 20f;
@@ -70,10 +76,11 @@ public class LockOnSystem : MonoBehaviour
         {
             UpdateHand("LEFT", leftHandTransform.position, leftHandTransform.rotation,
                 ref candidateLeft, ref previousCandidateLeft,
-                ref dwellTimerLeft, ref lockedTargetLeft);
+                ref dwellTimerLeft, ref lockedTargetLeft, ref diamondLeft);
         }
-        else{
-            ResetHand(ref candidateLeft, ref previousCandidateLeft, ref dwellTimerLeft, ref lockedTargetLeft);
+        else
+        {
+            ResetHand(ref candidateLeft, ref previousCandidateLeft, ref dwellTimerLeft, ref lockedTargetLeft, ref diamondLeft);
         }
 
         // RIGHT hand finger gun AND extended arm
@@ -81,20 +88,22 @@ public class LockOnSystem : MonoBehaviour
         {
             UpdateHand("RIGHT", rightHandTransform.position, rightHandTransform.rotation,
                 ref candidateRight, ref previousCandidateRight,
-                ref dwellTimerRight, ref lockedTargetRight);
+                ref dwellTimerRight, ref lockedTargetRight, ref diamondRight);
         }
-        else{
-            ResetHand(ref candidateRight, ref previousCandidateRight, ref dwellTimerRight, ref lockedTargetRight);
+        else
+        {
+            ResetHand(ref candidateRight, ref previousCandidateRight, ref dwellTimerRight, ref lockedTargetRight, ref diamondRight);
         }
     }
 
     // ResetHand() Breakdown: Essentially, just reset all the values for the lock on.
-    void ResetHand(ref Transform candidate, ref Transform previousCandidate, ref float dwellTimer, ref Transform locked)
+    void ResetHand(ref Transform candidate, ref Transform previousCandidate, ref float dwellTimer, ref Transform locked, ref GameObject diamond)
     {
         candidate = null;
         previousCandidate = null;
         dwellTimer = 0f;
         locked = null;
+        SetDiamond(ref diamond, null);
     }
 
     /*
@@ -112,7 +121,8 @@ public class LockOnSystem : MonoBehaviour
         ref Transform candidate,
         ref Transform previousCandidate,
         ref float dwellTimer,
-        ref Transform locked)
+        ref Transform locked,
+        ref GameObject diamond)
     {
         candidate = GetBestTarget(handPos, handRot * Vector3.forward);
 
@@ -122,10 +132,20 @@ public class LockOnSystem : MonoBehaviour
             dwellTimer += Time.deltaTime;
 
             if (dwellTimer >= dwellThreshold)
-                locked = candidate;
+            {
+                // BUG FIX: only lock if not already locked onto a *different* target
+                // Without this, sweeping to a new in-cone target instantly overwrites the lock
+                if (locked == null || locked == candidate)
+                    locked = candidate;
+            }
         }
         else
         {
+            // Candidate changed — clear lock immediately so re-dwell is required
+            if (locked != null && locked != candidate)
+            {
+                locked = null;
+            }
             // decay instead of instant reset
             dwellTimer = Mathf.Max(0f, dwellTimer - dwellDecayRate * Time.deltaTime);
         }
@@ -134,7 +154,34 @@ public class LockOnSystem : MonoBehaviour
         if (dwellTimer <= 0f)
             locked = null;
 
+        // Sync the diamond to whatever is currently locked
+        SetDiamond(ref diamond, locked);
+
         previousCandidate = candidate;
+    }
+
+    // Spawns, moves, or destroys the diamond to match the locked target
+    void SetDiamond(ref GameObject diamond, Transform target)
+    {
+        if (target == null)
+        {
+            if (diamond != null)
+            {
+                Destroy(diamond);
+                diamond = null;
+            }
+            return;
+        }
+
+        if (diamond == null && diamondPrefab != null)
+        {
+            diamond = Instantiate(diamondPrefab, target.position, Quaternion.identity);
+        }
+
+        if (diamond != null)
+        {
+            diamond.transform.position = target.position;
+        }
     }
 
     /*
