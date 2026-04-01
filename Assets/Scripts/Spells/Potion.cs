@@ -19,6 +19,13 @@ public class Potion : MonoBehaviour
         var ps = PlayerTransformState.Instance;
         if (ps == null) return;
 
+        /*var glow = SpellMaterialGlow.Instance;
+        if (glow != null)
+        {
+            glow.SetLeft(ps.lPotionReady ? glow.bluePotion : glow.whiteIdle);
+            glow.SetRight(ps.rPotionReady ? glow.bluePotion : glow.whiteIdle);
+        }*/
+
         InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         InputDevice rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
 

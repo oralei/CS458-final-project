@@ -6,8 +6,8 @@ public class Shield : MonoBehaviour
     public GameObject leftShield;
     public GameObject rightShield;
 
-    bool leftShieldActive = false;
-    bool rightShieldActive = false;
+    public bool leftShieldActive = false;
+    public bool rightShieldActive = false;
 
     bool leftButtonPrev = false;
     bool rightButtonPrev = false;
@@ -16,6 +16,12 @@ public class Shield : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public static Shield Instance { get; private set; }
+    void Awake() 
+    { 
+        Instance = this; 
     }
 
     // Update is called once per frame

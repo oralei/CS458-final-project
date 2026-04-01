@@ -20381,6 +20381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftShield: {fileID: 1024728742}
   rightShield: {fileID: 1272375001}
+  leftShieldActive: 0
+  rightShieldActive: 0
 --- !u!114 &6551965742902905528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20416,21 +20418,23 @@ MonoBehaviour:
   - {fileID: 1546940725}
   - {fileID: 1455920620}
   fireRed:
-    baseColor: {r: 1, g: 0.739271, b: 0, a: 0}
-    emissionColor: {r: 1, g: 0.58113, b: 0, a: 0}
-    emissionIntensity: 8
+    baseColor: {r: 1, g: 0.5476825, b: 0, a: 0}
+    emissionColor: {r: 1, g: 0.36153626, b: 0, a: 0}
+    emissionIntensity: 9
   greenShield:
     baseColor: {r: 0.7490196, g: 1, b: 0.7647059, a: 0}
     emissionColor: {r: 0, g: 1, b: 0.03137255, a: 0}
     emissionIntensity: 5
   bluePotion:
-    baseColor: {r: 0, g: 0.9898968, b: 1, a: 0}
-    emissionColor: {r: 0, g: 0.69419146, b: 1, a: 0}
-    emissionIntensity: 5
+    baseColor: {r: 0, g: 0.779325, b: 1, a: 0}
+    emissionColor: {r: 0, g: 0.614023, b: 1, a: 0}
+    emissionIntensity: 6
   whiteIdle:
     baseColor: {r: 1, g: 1, b: 1, a: 1}
     emissionColor: {r: 1, g: 1, b: 1, a: 1}
     emissionIntensity: 5
+  lLockTimer: 0
+  rLockTimer: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

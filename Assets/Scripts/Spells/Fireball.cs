@@ -29,7 +29,7 @@ public class Fireball : MonoBehaviour
         if (isCastingLeft && !wasCastingLeft)
         {
             Debug.Log("Left fireball cast!");
-            SpellMaterialGlow.Instance.SetLeft(SpellMaterialGlow.Instance.fireRed, 0.125f);
+
             lSparks.Play();
             GameObject fb = Instantiate(fbObj, lSpawn.transform.position, lSpawn.transform.rotation);
 
@@ -42,7 +42,7 @@ public class Fireball : MonoBehaviour
         if (isCastingRight && !wasCastingRight)
         {
             Debug.Log("Right fireball cast!");
-            SpellMaterialGlow.Instance.SetRight(SpellMaterialGlow.Instance.fireRed, 0.125f);
+
             rSparks.Play();
             GameObject fb = Instantiate(fbObj, rSpawn.transform.position, rSpawn.transform.rotation);
 

@@ -16,30 +16,40 @@ public class SpellMaterialGlow : MonoBehaviour
     Coroutine lRoutine;
     Coroutine rRoutine;
 
+    public float lLockTimer = 0f;
+    public float rLockTimer = 0f;
+
     void Awake() { Instance = this; }
 
-    public void SetLeft(SpellColor c, float duration = 0f)
+    void Update()
     {
-        if (lRoutine != null) StopCoroutine(lRoutine);
-        foreach (var r in lRenderers) SetSpellColor(r, c);
-        if (duration > 0f)
-            lRoutine = StartCoroutine(RevertAfter(lRenderers, true, duration));
+        var ps = PlayerTransformState.Instance;
+        if (ps == null) return;
+
+        UpdateHandGlow(ps, true);
+        UpdateHandGlow(ps, false);
     }
 
-    public void SetRight(SpellColor c, float duration = 0f)
+    void UpdateHandGlow(PlayerTransformState ps, bool isLeft)
     {
-        if (rRoutine != null) StopCoroutine(rRoutine);
-        foreach (var r in rRenderers) SetSpellColor(r, c);
-        if (duration > 0f)
-            rRoutine = StartCoroutine(RevertAfter(rRenderers, false, duration));
-    }
+        SpellColor color = whiteIdle;
+        bool shieldActive = Shield.Instance != null && (isLeft ? Shield.Instance.leftShieldActive : Shield.Instance.rightShieldActive);
 
-    IEnumerator RevertAfter(Renderer[] renderers, bool isLeft, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        foreach (var r in renderers) SetSpellColor(r, whiteIdle);
-        if (isLeft) lRoutine = null;
-        else rRoutine = null;
+        if (isLeft)
+        {
+            if (ps.lFireReady) color = fireRed;
+            else if (shieldActive) color = greenShield;
+            else if (ps.lPotionReady) color = bluePotion;
+        }
+        else
+        {
+            if (ps.rFireReady) color = fireRed;
+            else if (shieldActive) color = greenShield;
+            else if (ps.rPotionReady) color = bluePotion;
+        }
+
+        foreach (var r in (isLeft ? lRenderers : rRenderers))
+            SetSpellColor(r, color);
     }
 
     public void SetSpellColor(Renderer r, SpellColor spellColor)
