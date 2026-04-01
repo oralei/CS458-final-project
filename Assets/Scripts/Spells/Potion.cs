@@ -6,6 +6,7 @@ public class Potion : MonoBehaviour
     private bool lastLPressed;
     private bool lastRPressed;
     public int potionsRemaining = 5;
+    public Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,9 +25,11 @@ public class Potion : MonoBehaviour
         leftController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool lPressed);
         rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool rPressed);
 
-        if (lPressed && ps.lPotionReady && !lastLPressed)
+        if (ps.lPotionReady)
         {
-            DrinkPotion();
+            
+            if (lPressed && !lastLPressed)
+                DrinkPotion();
         }
 
         if (rPressed && ps.rPotionReady && !lastRPressed)

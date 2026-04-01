@@ -1,33 +1,52 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class SpellMaterialGlow : MonoBehaviour
 {
-    Material material;
-    GameObject glowPart;
+    public static SpellMaterialGlow Instance;
 
-    SpellColor blue = new SpellColor();
-    SpellColor red = new SpellColor();
-    SpellColor green = new SpellColor();
-    SpellColor white = new SpellColor(Color.white, Color.white, 5f);
+    public Renderer[] lRenderers;
+    public Renderer[] rRenderers;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public SpellColor fireRed = new SpellColor(new Color(1f, 0.18f, 0f), new Color(1f, 0.16f, 0f), 5f);
+    public SpellColor greenShield = new SpellColor(new Color(0.75f, 1f, 0.76f), new Color(0f, 1f, 0.03f), 4f);
+    public SpellColor bluePotion = new SpellColor(new Color(0f, 0.77f, 1f), new Color(0f, 0.27f, 1f), 6f);
+    public SpellColor whiteIdle = new SpellColor(Color.white, Color.white, 5f);
+
+    Coroutine lRoutine;
+    Coroutine rRoutine;
+
+    void Awake() { Instance = this; }
+
+    public void SetLeft(SpellColor c, float duration = 0f)
     {
-        material = GetComponent<Renderer>().material;
+        if (lRoutine != null) StopCoroutine(lRoutine);
+        foreach (var r in lRenderers) SetSpellColor(r, c);
+        if (duration > 0f)
+            lRoutine = StartCoroutine(RevertAfter(lRenderers, true, duration));
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetRight(SpellColor c, float duration = 0f)
     {
-        
+        if (rRoutine != null) StopCoroutine(rRoutine);
+        foreach (var r in rRenderers) SetSpellColor(r, c);
+        if (duration > 0f)
+            rRoutine = StartCoroutine(RevertAfter(rRenderers, false, duration));
     }
 
-    public void SetSpellColor(SpellColor spellColor)
+    IEnumerator RevertAfter(Renderer[] renderers, bool isLeft, float duration)
     {
-        material.SetColor("_MainColor", spellColor.baseColor);
-        material.SetColor("_Emission", spellColor.emissionColor);
-        material.SetFloat("_Intensity", spellColor.emissionIntensity);
+        yield return new WaitForSeconds(duration);
+        foreach (var r in renderers) SetSpellColor(r, whiteIdle);
+        if (isLeft) lRoutine = null;
+        else rRoutine = null;
+    }
+
+    public void SetSpellColor(Renderer r, SpellColor spellColor)
+    {
+        r.material.SetColor("_MainColor", spellColor.baseColor);
+        r.material.SetColor("_Emission", spellColor.emissionColor);
+        r.material.SetFloat("_Intensity", spellColor.emissionIntensity);
     }
 }
 
