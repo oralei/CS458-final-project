@@ -9,8 +9,8 @@ public class SpellMaterialGlow : MonoBehaviour
     public Renderer[] rRenderers;
 
     public SpellColor fireRed = new SpellColor(new Color(1f, 0.18f, 0f), new Color(1f, 0.16f, 0f), 5f);
-    public SpellColor greenShield = new SpellColor(new Color(0.75f, 1f, 0.76f), new Color(0f, 1f, 0.03f), 4f);
-    public SpellColor bluePotion = new SpellColor(new Color(0f, 0.77f, 1f), new Color(0f, 0.27f, 1f), 6f);
+    public SpellColor greenPotion = new SpellColor(new Color(0.75f, 1f, 0.76f), new Color(0f, 1f, 0.03f), 4f);
+    public SpellColor blueShield = new SpellColor(new Color(0f, 0.77f, 1f), new Color(0f, 0.27f, 1f), 6f);
     public SpellColor whiteIdle = new SpellColor(Color.white, Color.white, 5f);
 
     Coroutine lRoutine;
@@ -38,14 +38,14 @@ public class SpellMaterialGlow : MonoBehaviour
         if (isLeft)
         {
             if (ps.lFireReady) color = fireRed;
-            else if (shieldActive) color = greenShield;
-            else if (ps.lPotionReady) color = bluePotion;
+            else if (shieldActive) color = blueShield;
+            else if (ps.lPotionReady) color = greenPotion;
         }
         else
         {
             if (ps.rFireReady) color = fireRed;
-            else if (shieldActive) color = greenShield;
-            else if (ps.rPotionReady) color = bluePotion;
+            else if (shieldActive) color = blueShield;
+            else if (ps.rPotionReady) color = greenPotion;
         }
 
         foreach (var r in (isLeft ? lRenderers : rRenderers))

@@ -42,16 +42,16 @@ public class Potion : MonoBehaviour
         if (ps == null) return;
 
         // Left potion visibility
-        if (leftPotionObj != null && potionsRemaining != 0)
+        if (leftPotionObj != null)
         {
-            bool showLeft = ps.lPotionReady && leftCanDrink && potionsRemaining > 0; ;
+            bool showLeft = ps.lPotionReady && leftCanDrink && potionsRemaining > 0;
             leftPotionObj.SetActive(showLeft);
         }
 
         // Right potion visibility
-        if (rightPotionObj != null && potionsRemaining != 0)
+        if (rightPotionObj != null)
         {
-            bool showRight = ps.rPotionReady && rightCanDrink && potionsRemaining > 0; ;
+            bool showRight = ps.rPotionReady && rightCanDrink && potionsRemaining > 0;
             rightPotionObj.SetActive(showRight);
         }
 

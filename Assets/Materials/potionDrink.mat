@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: fireBallBall 1
+  m_Name: potionDrink
   m_Shader: {fileID: -6465566751694194690, guid: ef8645fad4603784bbd13931087f79a1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -101,7 +101,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Float: 2
+    - _Float: 3.73
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -121,8 +121,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.109803915, g: 0.89262855, b: 1, a: 1}
-    - _Color_1: {r: 0, g: 0.5901637, b: 1, a: 0}
+    - _Color: {r: 0.5137255, g: 1, b: 0.6986337, a: 1}
+    - _Color_1: {r: 0, g: 0.6886792, b: 0.15033726, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

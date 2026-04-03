@@ -62,10 +62,5 @@ public class EnemyMagicMissle : MonoBehaviour
             PlayerMain.Instance.DamagePlayer(damage, null); // null = no headshot
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Shield"))
-        {
-            Debug.Log("Blocked!");
-            Destroy(gameObject);
-        }
     }
 }

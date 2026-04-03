@@ -260,6 +260,7 @@ public class LockOnSystem : MonoBehaviour
 
     // --- Gizmo Visualization ---
     // Simply draws a cone based on hand position, cone shape, and lock on state
+    /*
     void OnDrawGizmos()
     {
         if (leftHandTransform != null)
@@ -284,5 +285,5 @@ public class LockOnSystem : MonoBehaviour
             Vector3 edge = rot * (Quaternion.AngleAxis(coneAngle, handRot * Vector3.right) * forward);
             Gizmos.DrawRay(origin, edge * coneRange);
         }
-    }
+    } */
 }

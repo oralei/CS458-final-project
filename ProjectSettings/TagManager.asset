@@ -9,6 +9,7 @@ TagManager:
   - PlayerHead
   - PlayerBody
   - Shield
+  - EnemyProj
   layers:
   - Default
   - TransparentFX
