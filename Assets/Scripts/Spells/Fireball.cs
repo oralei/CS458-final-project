@@ -14,8 +14,13 @@ public class Fireball : MonoBehaviour
     public ParticleSystem lSparks;
     public ParticleSystem rSparks;
 
+    [SerializeField] private AudioClip[] clipArray;
+    public AudioSource lSound;
+    public AudioSource rSound;
+
     public float leftCoolDown = 1.5f;
     public float rightCoolDown = 1.5f;
+
     private bool leftCanFire = true;
     private bool rightCanFire= true;
     // UI
@@ -28,10 +33,10 @@ public class Fireball : MonoBehaviour
     void Start()
     {
         if (leftCooldownImage != null)
-            leftCooldownImage.fillAmount = 0f;
+            leftCooldownImage.fillAmount = 1f;
 
         if (rightCooldownImage != null)
-            rightCooldownImage.fillAmount = 0f;
+            rightCooldownImage.fillAmount = 1f;
     }
     void Update()
     {
@@ -54,6 +59,8 @@ public class Fireball : MonoBehaviour
             StartCoroutine(Cooldown(leftCoolDown, true));
 
             lSparks.Play();
+            lSound.PlayOneShot(clipArray[Random.Range(0, clipArray.Length - 1)]);
+
             GameObject fb = Instantiate(fbObj, lSpawn.transform.position, lSpawn.transform.rotation);
 
             leftController.SendHapticImpulse(0, 0.3f, 0.2f);
@@ -70,6 +77,7 @@ public class Fireball : MonoBehaviour
             StartCoroutine(Cooldown(rightCoolDown, false));
 
             rSparks.Play();
+            rSound.PlayOneShot(clipArray[Random.Range(0, clipArray.Length - 1)]);
             GameObject fb = Instantiate(fbObj, rSpawn.transform.position, rSpawn.transform.rotation);
 
             rightController.SendHapticImpulse(0, 0.3f, 0.2f);
@@ -106,26 +114,26 @@ public class Fireball : MonoBehaviour
         {
             leftCooldownTimer -= Time.deltaTime;
             if (leftCooldownImage != null)
-                leftCooldownImage.fillAmount = leftCooldownTimer / leftCoolDown;
+                leftCooldownImage.fillAmount = 1f - (leftCooldownTimer / leftCoolDown);
         }
         else
         {
             leftCooldownTimer = 0f;
             if (leftCooldownImage != null)
-                leftCooldownImage.fillAmount = 0f;
+                leftCooldownImage.fillAmount = 1f;
         }
 
         if (rightCooldownTimer > 0f)
         {
             rightCooldownTimer -= Time.deltaTime;
             if (rightCooldownImage != null)
-                rightCooldownImage.fillAmount = rightCooldownTimer / rightCoolDown;
+                rightCooldownImage.fillAmount = 1f - (rightCooldownTimer / rightCoolDown);
         }
         else
         {
             rightCooldownTimer = 0f;
             if (rightCooldownImage != null)
-                rightCooldownImage.fillAmount = 0f;
+                rightCooldownImage.fillAmount = 1f;
         }
     }
 

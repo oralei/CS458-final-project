@@ -1,12 +1,15 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
-using System.Collections;
+using TMPro;
 
 public class Potion : MonoBehaviour
 {
     private bool lastLPressed;
     private bool lastRPressed;
     public int potionsRemaining = 5;
+    [SerializeField] TextMeshProUGUI potsText;
 
     public GameObject leftPotionObj;
     public GameObject rightPotionObj;
@@ -14,6 +17,17 @@ public class Potion : MonoBehaviour
     public float potionCoolDown = 1;
     private bool leftCanDrink = true;
     private bool rightCanDrink = true;
+
+    public AudioClip emptySound;
+    public AudioClip drinkSound;
+    public AudioSource lSound;
+    public AudioSource rSound;
+
+    public static Potion Instance { get; private set; }
+    void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,16 +42,16 @@ public class Potion : MonoBehaviour
         if (ps == null) return;
 
         // Left potion visibility
-        if (leftPotionObj != null)
+        if (leftPotionObj != null && potionsRemaining != 0)
         {
-            bool showLeft = ps.lPotionReady && leftCanDrink;
+            bool showLeft = ps.lPotionReady && leftCanDrink && potionsRemaining > 0; ;
             leftPotionObj.SetActive(showLeft);
         }
 
         // Right potion visibility
-        if (rightPotionObj != null)
+        if (rightPotionObj != null && potionsRemaining != 0)
         {
-            bool showRight = ps.rPotionReady && rightCanDrink;
+            bool showRight = ps.rPotionReady && rightCanDrink && potionsRemaining > 0; ;
             rightPotionObj.SetActive(showRight);
         }
 
@@ -65,11 +79,25 @@ public class Potion : MonoBehaviour
 
     void DrinkPotion(bool isLeft)
     {
-        if (potionsRemaining <= 0) return;
+        if (potionsRemaining <= 0)
+        {
+            if (isLeft)
+                lSound.PlayOneShot(emptySound);
+            else
+                rSound.PlayOneShot(emptySound);
+
+            return;
+        }
+
+        if (isLeft)
+            lSound.PlayOneShot(drinkSound);
+        else
+            rSound.PlayOneShot(drinkSound);
 
         StartCoroutine(Cooldown(potionCoolDown, isLeft));
         PlayerMain.Instance.HealPlayer(20f);
         potionsRemaining--;
+        potsText.text = "Potions: " + potionsRemaining;
     }
 
     IEnumerator Cooldown(float cooldown, bool isLeft)

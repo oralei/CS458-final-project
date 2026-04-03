@@ -28,7 +28,7 @@ public class HandAnimController : MonoBehaviour
         var ps = PlayerTransformState.Instance;
         if (ps != null)
         {
-            bool drinking = isLeftHand ? ps.lPotionReady : ps.rPotionReady;
+            bool drinking = (isLeftHand ? ps.lPotionReady : ps.rPotionReady) && (Potion.Instance.potionsRemaining > 0);
             animator.SetBool("isDrinking", drinking);
         }
     }
