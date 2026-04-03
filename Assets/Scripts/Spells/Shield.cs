@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class Shield : MonoBehaviour
 {
@@ -11,6 +12,26 @@ public class Shield : MonoBehaviour
 
     bool leftButtonPrev = false;
     bool rightButtonPrev = false;
+
+    [Header("Duration")]
+    public float shieldDuration = 3f;
+
+    [Header("Cooldown")]
+    public float shieldCooldown = 2.25f;
+
+    // Per-hand timers
+    private float leftDurationTimer = 0f;
+    private float rightDurationTimer = 0f;
+
+    private float leftCooldownTimer = 0f;
+    private float rightCooldownTimer = 0f;
+
+    private bool leftCanActivate = true;
+    private bool rightCanActivate = true;
+
+    [Header("UI")]
+    public Image leftDurationImage;
+    public Image rightDurationImage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,38 +61,132 @@ public class Shield : MonoBehaviour
         bool leftPressed = leftButton && !leftButtonPrev;
         bool rightPressed = rightButton && !rightButtonPrev;
 
-        // Activate on press if gesture is ready, toggle off on press again
+        // --- Activate / manual toggle off ---
         if (leftPressed)
         {
-            if (!leftShieldActive && ps.lShieldReady)
-                leftShieldActive = true;
+            if (!leftShieldActive && ps.lShieldReady && leftCanActivate)
+                ActivateShieldState(true);
             else if (leftShieldActive)
-                leftShieldActive = false;
+                DeactivateShieldState(true);
         }
 
         if (rightPressed)
         {
-            if (!rightShieldActive && ps.rShieldReady)
-                rightShieldActive = true;
+            if (!rightShieldActive && ps.rShieldReady && rightCanActivate)
+                ActivateShieldState(false);
             else if (rightShieldActive)
-                rightShieldActive = false;
+                DeactivateShieldState(false);
         }
 
-        // Force off if fist is released (arm position no longer matters)
-        if (!ps.LeftFist) leftShieldActive = false;
-        if (!ps.RightFist) rightShieldActive = false;
+        // --- Force off if fist released ---
+        if (!ps.LeftFist && leftShieldActive) DeactivateShieldState(true);
+        if (!ps.RightFist && rightShieldActive) DeactivateShieldState(false);
 
-        ActivateShield(leftShield, leftShieldActive);
-        ActivateShield(rightShield, rightShieldActive);
+        // --- Tick duration timers ---
+        if (leftShieldActive)
+        {
+            leftDurationTimer -= Time.deltaTime;
+            if (leftDurationTimer <= 0f)
+                DeactivateShieldState(true);
+        }
+
+        if (rightShieldActive)
+        {
+            rightDurationTimer -= Time.deltaTime;
+            if (rightDurationTimer <= 0f)
+                DeactivateShieldState(false);
+        }
+
+        // --- Tick cooldown timers ---
+        if (!leftCanActivate)
+        {
+            leftCooldownTimer -= Time.deltaTime;
+            if (leftCooldownTimer <= 0f)
+            {
+                leftCooldownTimer = 0f;
+                leftCanActivate = true;
+            }
+        }
+
+        if (!rightCanActivate)
+        {
+            rightCooldownTimer -= Time.deltaTime;
+            if (rightCooldownTimer <= 0f)
+            {
+                rightCooldownTimer = 0f;
+                rightCanActivate = true;
+            }
+        }
+
+        UpdateUI();
+
+        ActivateShieldObject(leftShield, leftShieldActive);
+        ActivateShieldObject(rightShield, rightShieldActive);
 
         leftButtonPrev = leftButton;
         rightButtonPrev = rightButton;
     }
 
-    void ActivateShield(GameObject shieldObject, bool castHand)
+    void ActivateShieldState(bool isLeft)
     {
-        // Check if shield is already active to save SetActive call for performance.
-        if (shieldObject.activeSelf != castHand)
-            shieldObject.SetActive(castHand);
+        if (isLeft)
+        {
+            leftShieldActive = true;
+            leftDurationTimer = shieldDuration;
+        }
+        else
+        {
+            rightShieldActive = true;
+            rightDurationTimer = shieldDuration;
+        }
+    }
+
+    void ActivateShieldObject(GameObject shieldObject, bool state)
+    {
+        if (shieldObject.activeSelf != state)
+            shieldObject.SetActive(state);
+    }
+
+    // Called on manual toggle-off, fist release, or expiry
+    void DeactivateShieldState(bool isLeft)
+    {
+        if (isLeft)
+        {
+            leftShieldActive = false;
+            leftDurationTimer = 0f;
+            leftCanActivate = false;
+            leftCooldownTimer = shieldCooldown;
+        }
+        else
+        {
+            rightShieldActive = false;
+            rightDurationTimer = 0f;
+            rightCanActivate = false;
+            rightCooldownTimer = shieldCooldown;
+        }
+    }
+
+    void UpdateUI()
+    {
+        // Active: 1 to 0 (draining). Cooldown: 0 to 1 (refilling). Idle (ready): 1.
+        if (leftDurationImage != null)
+        {
+            if (leftShieldActive)
+                leftDurationImage.fillAmount = leftDurationTimer / shieldDuration;
+            else if (!leftCanActivate)
+                leftDurationImage.fillAmount = 1f - (leftCooldownTimer / shieldCooldown);
+            else
+                leftDurationImage.fillAmount = 1f;
+        }
+
+        if (rightDurationImage != null)
+        {
+            if (rightShieldActive)
+                rightDurationImage.fillAmount = rightDurationTimer / shieldDuration;
+            else if (!rightCanActivate)
+                rightDurationImage.fillAmount = 1f - (rightCooldownTimer / shieldCooldown);
+            else
+                rightDurationImage.fillAmount = 1f;
+        }
     }
 }

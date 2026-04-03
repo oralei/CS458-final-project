@@ -18,8 +18,8 @@ public class Fireball : MonoBehaviour
     public AudioSource lSound;
     public AudioSource rSound;
 
-    public float leftCoolDown = 1.5f;
-    public float rightCoolDown = 1.5f;
+    public float leftCoolDown = 1.25f;
+    public float rightCoolDown = 1.25f;
 
     private bool leftCanFire = true;
     private bool rightCanFire= true;
