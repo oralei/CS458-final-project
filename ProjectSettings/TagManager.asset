@@ -10,6 +10,8 @@ TagManager:
   - PlayerBody
   - Shield
   - EnemyProj
+  - BreakableDoor
+  - PlayerFB
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - UI
   - Target
   - LockOn
-  - 
+  - World
   - 
   - 
   - 
