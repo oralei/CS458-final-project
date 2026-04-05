@@ -10,8 +10,8 @@ public class BreakableDoor : MonoBehaviour
         if (other.CompareTag("PlayerFB"))
         {
             Instantiate(doorBreakStuff, transform.position + (Vector3.up * 1f), transform.rotation);
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
-        Destroy(other.gameObject);
     }
 }

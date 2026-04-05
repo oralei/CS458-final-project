@@ -57,5 +57,9 @@ public class FireballProjectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        else if(other.CompareTag("World"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

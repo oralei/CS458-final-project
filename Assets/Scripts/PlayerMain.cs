@@ -13,6 +13,8 @@ public class PlayerMain : MonoBehaviour
     public Transform HeadAimPoint;
     public Transform ChestAimPoint;
 
+    [SerializeField] private HitFlash _hitFlash;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -41,6 +43,7 @@ public class PlayerMain : MonoBehaviour
 
         health = Mathf.Clamp(health - damage, 0, 100);
         healthText.text = "Health: " + health;
+        _hitFlash.TriggerFlash();
     }
 
     public Vector3 GetChestPosition()

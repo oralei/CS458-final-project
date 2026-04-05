@@ -7,7 +7,8 @@ public class EnemyMagicMissle : MonoBehaviour
     public float homingStrength = 25f;  // how aggressively it steers
     [HideInInspector] public Transform homingTarget;
     private Rigidbody rb;
-    public float damage = 1f;
+    public float damage = 10f;
+    public bool isHoming = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +27,7 @@ public class EnemyMagicMissle : MonoBehaviour
     // Update is called based on framerate
     void FixedUpdate()
     {
-        if (homingTarget == null) return;
+        if (!isHoming || homingTarget == null) return;
 
         // Proportional Navigation: steer toward target
         Vector3 dirToTarget = (homingTarget.position - transform.position).normalized;
@@ -54,12 +55,16 @@ public class EnemyMagicMissle : MonoBehaviour
     {
         if (other.CompareTag("PlayerHead"))
         {
-            PlayerMain.Instance.DamagePlayer(damage, PlayerMain.Instance.headHitBox);
+            PlayerMain.Instance.DamagePlayer(damage * 1.5f, PlayerMain.Instance.headHitBox);
             Destroy(gameObject);
         }
         else if (other.CompareTag("PlayerBody"))
         {
             PlayerMain.Instance.DamagePlayer(damage, null); // null = no headshot
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("World"))
+        {
             Destroy(gameObject);
         }
     }

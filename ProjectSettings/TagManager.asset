@@ -12,6 +12,7 @@ TagManager:
   - EnemyProj
   - BreakableDoor
   - PlayerFB
+  - World
   layers:
   - Default
   - TransparentFX

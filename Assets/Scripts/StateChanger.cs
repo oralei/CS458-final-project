@@ -3,23 +3,14 @@ using UnityEngine;
 public class StateChanger : MonoBehaviour
 {
     public WizardBehaviour w;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private bool triggered = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerHead"))
+        if (other.CompareTag("PlayerHead") && !triggered)
         {
+            triggered = true;
             w.DisplayText();
-
         }
     }
 }
