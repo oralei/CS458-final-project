@@ -9,7 +9,8 @@ public class WizardBehaviour : MonoBehaviour
     public GameObject wizardModel;
     public ParticleSystem p;
     public AudioSource a;
-    
+    public AudioSource dialogueSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,7 +41,7 @@ public class WizardBehaviour : MonoBehaviour
                 break;
             case 2:
                 wizardModel.SetActive(true);
-                dialogue.text = "Hoho! That is incredible! Fire magic? Out of your fingertip? But beware... I've set up defensive construsts to test your limits!";
+                dialogue.text = "Hoho! That is incredible! Fire magic? Out of your fingertip? But beware... I've set up defensive constructs to test your limits!";
                 GameManager.Instance.gameState++;
                 StartCoroutine("Deactivate");
                 break;
@@ -60,12 +61,13 @@ public class WizardBehaviour : MonoBehaviour
                 Debug.Log("Hit default, gameState = " + GameManager.Instance.gameState);
                 break;
         }
+        dialogueSound.Play();
     }
 
     IEnumerator Deactivate()
     {
         Debug.Log("gameState: " + GameManager.Instance.gameState);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(10);
 
         wizardModel.SetActive(false);
     }
