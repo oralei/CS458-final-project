@@ -155,7 +155,8 @@ MonoBehaviour:
   lifetime: 3
   homingStrength: 33
   homingTarget: {fileID: 0}
-  damage: 1
+  damage: 15
+  isHoming: 0
 --- !u!1 &5161762218489176302
 GameObject:
   m_ObjectHideFlags: 0

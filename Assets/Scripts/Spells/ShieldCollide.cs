@@ -31,13 +31,13 @@ public class ShieldCollide : MonoBehaviour
         if (other.CompareTag("EnemyProj"))
         {
             if (isLeft && leftController != null)
-                leftController.SendHapticImpulse(0, 0.75f, 0.35f);
+                leftController.SendHapticImpulse(0, 0.85f, 0.35f);
             else if (!isLeft && rightController != null)
-                rightController.SendHapticImpulse(0, 0.75f, 0.35f);
+                rightController.SendHapticImpulse(0, 0.85f, 0.35f);
 
             Debug.Log("Blocked!");
             source.clip = hitSound;
-            source.pitch = (Random.Range(0.8f, 1.2f));
+            source.pitch = (Random.Range(0.6f, 1.4f));
             source.Play();
 
             Destroy(other.gameObject);

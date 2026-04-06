@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Tutorial.unity
+    guid: 81e301d63852b61458591d3a4ef32e52
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: af3cbe20293b2c1448740c4a0cdd9450, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

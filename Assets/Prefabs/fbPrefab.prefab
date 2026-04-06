@@ -129,6 +129,7 @@ MonoBehaviour:
   lifetime: 4
   homingStrength: 25
   homingTarget: {fileID: 0}
+  impact: {fileID: 3672514035216637908, guid: e765c1b947f18644fa0a147602083dad, type: 3}
 --- !u!54 &2640272656119589807
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class FireballProjectile : MonoBehaviour
     public float homingStrength = 25f;  // how aggressively it steers
     [HideInInspector] public Transform homingTarget;
     private Rigidbody rb;
+    private float damage = 25f;
+    public GameObject impact;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,7 +55,7 @@ public class FireballProjectile : MonoBehaviour
                 Destroy(other.gameObject);
             }
             else{
-                eh.TakeDamage(25f);
+                eh.TakeDamage(damage);
             }
             Destroy(gameObject);
         }
@@ -61,5 +63,10 @@ public class FireballProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        Instantiate(impact, transform.position, transform.rotation);
     }
 }

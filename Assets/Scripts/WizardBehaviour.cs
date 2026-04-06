@@ -34,25 +34,25 @@ public class WizardBehaviour : MonoBehaviour
                 StartCoroutine("Deactivate");
                 break;
             case 1:
-                wizardModel.SetActive(true);
+                wizardModel.SetActive(true); a.Play(); p.Play();
                 dialogue.text = "But first, you'll have to get through this door. If you only had some way to break it open...";
                 GameManager.Instance.gameState++;
                 StartCoroutine("Deactivate");
                 break;
             case 2:
-                wizardModel.SetActive(true);
+                wizardModel.SetActive(true); a.Play(); p.Play();
                 dialogue.text = "Hoho! That is incredible! Fire magic? Out of your fingertip? But beware... I've set up defensive constructs to test your limits!";
                 GameManager.Instance.gameState++;
                 StartCoroutine("Deactivate");
                 break;
             case 3:
-                wizardModel.SetActive(true);
+                wizardModel.SetActive(true); a.Play(); p.Play();
                 dialogue.text = "Hmmm... looks like you've taken a hit. Maybe drinking a potion would help ease your pain...";
                 GameManager.Instance.gameState++;
                 StartCoroutine("Deactivate");
                 break;
             case 4:
-                wizardModel.SetActive(true);
+                wizardModel.SetActive(true); a.Play(); p.Play();
                 dialogue.text = "Easy there! Those are some dangerous missles incoming! Don't want to get hurt eh? I wonder if there's a way you can block those attacks...";
                 GameManager.Instance.gameState++;
                 StartCoroutine("Deactivate");
