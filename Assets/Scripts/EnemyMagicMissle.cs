@@ -9,6 +9,7 @@ public class EnemyMagicMissle : MonoBehaviour
     private Rigidbody rb;
     public float damage = 10f;
     public bool isHoming = false;
+    public GameObject impact;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,5 +68,11 @@ public class EnemyMagicMissle : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        GameObject impactP = Instantiate(impact, transform.position, transform.rotation);
+        impactP.GetComponent<AudioSource>().pitch = Random.Range(0.7f, 1.3f);
     }
 }

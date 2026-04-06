@@ -157,6 +157,7 @@ MonoBehaviour:
   homingTarget: {fileID: 0}
   damage: 15
   isHoming: 0
+  impact: {fileID: 3672514035216637908, guid: fe17c81dbd9a103469e4933bafe38c14, type: 3}
 --- !u!1 &5161762218489176302
 GameObject:
   m_ObjectHideFlags: 0

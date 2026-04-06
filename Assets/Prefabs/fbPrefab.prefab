@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f87fa2a1147714ebab8d0905789870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 4
+  lifetime: 10
   homingStrength: 25
   homingTarget: {fileID: 0}
   impact: {fileID: 3672514035216637908, guid: e765c1b947f18644fa0a147602083dad, type: 3}

@@ -37,7 +37,7 @@ public class ShieldCollide : MonoBehaviour
 
             Debug.Log("Blocked!");
             source.clip = hitSound;
-            source.pitch = (Random.Range(0.6f, 1.4f));
+            source.pitch = (Random.Range(0.4f, 1.5f));
             source.Play();
 
             Destroy(other.gameObject);

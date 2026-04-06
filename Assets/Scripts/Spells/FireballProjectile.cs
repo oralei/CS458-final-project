@@ -67,6 +67,7 @@ public class FireballProjectile : MonoBehaviour
 
     void OnDestroy()
     {
-        Instantiate(impact, transform.position, transform.rotation);
+        GameObject impactP = Instantiate(impact, transform.position, transform.rotation);
+        impactP.GetComponent<AudioSource>().pitch = Random.Range(0.7f, 1.3f);
     }
 }

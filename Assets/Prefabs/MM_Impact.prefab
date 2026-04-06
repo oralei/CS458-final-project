@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8339117681776493968}
   - component: {fileID: -8997488635968079193}
   m_Layer: 6
-  m_Name: TurretImpact
+  m_Name: MM_Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,9 +46,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: acdc68c2f6a1abe4da8f25ff136c3b4f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5b97f93806ba8e84bbe9b87eda418667, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.559
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -57,7 +57,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 11
+  MaxDistance: 3
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -386,8 +386,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.1
+      scalar: 0.01
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1079,7 +1079,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 29
+        scalar: 15
         minScalar: 10
         maxCurve:
           serializedVersion: 2
