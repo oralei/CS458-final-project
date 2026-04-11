@@ -142,9 +142,12 @@ public class LockOnSystem : MonoBehaviour
         else
         {
             // Candidate changed — clear lock immediately so re-dwell is required
-            if (locked != null && locked != candidate)
+            if (locked == null || locked == candidate)
             {
-                locked = null;
+                bool wasUnlocked = locked == null;
+                locked = candidate;
+                if (wasUnlocked)
+                    TriggerHaptic(hand);
             }
             // decay instead of instant reset
             dwellTimer = Mathf.Max(0f, dwellTimer - dwellDecayRate * Time.deltaTime);
@@ -256,6 +259,21 @@ public class LockOnSystem : MonoBehaviour
 
         // Return the Transform of the best calculated/selected target.
         return best;
+    }
+
+    void TriggerHaptic(string hand)
+    {
+        var inputDevices = new System.Collections.Generic.List<UnityEngine.XR.InputDevice>();
+        UnityEngine.XR.XRNode node = hand == "LEFT"
+            ? UnityEngine.XR.XRNode.LeftHand
+            : UnityEngine.XR.XRNode.RightHand;
+
+        UnityEngine.XR.InputDevices.GetDevicesAtXRNode(node, inputDevices);
+
+        foreach (var device in inputDevices)
+        {
+            device.SendHapticImpulse(0, 0.5f, 0.25f);
+        }
     }
 
     // --- Gizmo Visualization ---
